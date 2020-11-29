@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="steel_gray">#191926</color>
+    <color name="steel_gray_bg">#E6191926</color>
+    <color name="steel_gray_gradient">#00191926</color>
+    <color name="whisper">#ECECEC</color>
+    <color name="radical_red">#FF3466</color>
+    <color name="storm_gray">#6D6D80</color>
+    <color name="alto">#D8D8D8</color>
+    <color name="white_with_alpha">#80FFFFFF</color>
 </resources>

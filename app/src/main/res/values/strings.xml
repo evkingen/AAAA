@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">AAAA</string>
+    <string name="back">Back</string>
+    <string name="storyline_title">Storyline</string>
+    <string name="storyline_descr">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.</string>
+    <string name="cast_title">Cast</string>
+    <string name="pg">13+</string>
+    <string name="movie_name">Avengers:\nEnd Game</string>
+    <string name="detail_movie_descr">Movie\'s poster</string>
+    <string name="genre">Action, Adventure, Fantasy</string>
+    <string name="count_review">125 Reviews</string>
+    <string name="actor_image_descr">Actor\'s image</string>
 </resources>
