@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="inner_spacing_rating_bar_on_detail_screen">3dp</dimen>
+    <!-- common paddings dimensions-->
     <dimen name="padding_tiny">2dp</dimen>
     <dimen name="padding_1x">4dp</dimen>
     <dimen name="padding_small">6dp</dimen>
     <dimen name="padding_2x">8dp</dimen>
     <dimen name="padding_4x">16dp</dimen>
     <dimen name="padding_6x">24dp</dimen>
+    <dimen name="padding_8x">36dp</dimen>
     <dimen name="padding_14x">56dp</dimen>
     <!--movie screen dimensions-->
     <dimen name="margin_detail_between_movie_name">36dp</dimen>
@@ -14,10 +15,18 @@
     <dimen name="left_padding_movie_screen">-30dp</dimen>
     <dimen name="right_padding_movie_screen">-125dp</dimen>
     <!-- text dimensions -->
+    <dimen name="text_size_body_tiny">8sp</dimen>
     <dimen name="text_size_body">14sp</dimen>
     <dimen name="line_spacing_tiny">2sp</dimen>
     <dimen name="text_size_body_small">12sp</dimen>
     <dimen name="text_size_header">40sp</dimen>
     <dimen name="line_spacing_small">4sp</dimen>
+    <!-- rating bar inner spacing -->
+    <dimen name="inner_spacing_rating_bar_on_detail_screen">3dp</dimen>
+    <dimen name="inner_spacing_rating_bar_on_list_screen">2dp</dimen>
+    <!-- movie cardview dimensions -->
+    <dimen name="movie_card_corners">8dp</dimen>
+    <dimen name="movie_card_elevation">24dp</dimen>
+    <dimen name="movie_card_max_height_image">248dp</dimen>
 
 </resources>

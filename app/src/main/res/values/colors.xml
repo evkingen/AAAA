@@ -14,5 +14,6 @@
     <color name="radical_red">#FF3466</color>
     <color name="storm_gray">#6D6D80</color>
     <color name="alto">#D8D8D8</color>
+    <color name="smoky">#565665</color>
     <color name="white_with_alpha">#80FFFFFF</color>
 </resources>

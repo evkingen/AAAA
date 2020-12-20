@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/steel_gray"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".MainActivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/detail_movie_iv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_detail_between_movie_name"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/detail_movie_descr"
+            android:foreground="@drawable/gradient"
+            android:maxHeight="@dimen/max_height_movie_screen"
+            android:paddingStart="@dimen/left_padding_movie_screen"
+            android:paddingEnd="@dimen/right_padding_movie_screen"
+            android:scaleType="centerCrop"
+            android:src="@drawable/movie_poster"
+            app:layout_constraintBottom_toBottomOf="@id/movie_name_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_14x"
+            android:drawablePadding="@dimen/padding_2x"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/line_spacing_tiny"
+            android:padding="@dimen/padding_tiny"
+            android:text="@string/back"
+            android:textAppearance="@style/TextAppearanceMaterialCustom.Body"
+            android:textColor="@color/white_with_alpha"
+            android:textSize="@dimen/text_size_body_small"
+            app:drawableStartCompat="@drawable/ic_left_chevron"
+            app:layout_constraintStart_toStartOf="@+id/start_margin_guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            layout="@layout/widget_restriction_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/movie_name_tv"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@id/start_margin_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/movie_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_2x"
+            android:text="@string/movie_name"
+            android:textAppearance="@style/TextAppearanceMaterialCustom.Headline.Shadow"
+            android:textColor="@color/whisper"
+            android:textSize="@dimen/text_size_header"
+            app:layout_constraintBottom_toBottomOf="@id/detail_movie_iv"
+            app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_margin_guideline" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/genre_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_1x"
+            android:text="@string/genre"
+            android:textAppearance="@style/TextAppearanceMaterialCustom.Body"
+            android:textColor="@color/radical_red"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_margin_guideline"
+            app:layout_constraintTop_toBottomOf="@id/movie_name_tv" />
+
+        <com.alohagoha.aaaa.ui.utils.customview.ExtRatingBar
+            android:id="@+id/movie_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_2x"
+            android:layout_marginEnd="@dimen/padding_2x"
+            android:numStars="5"
+            android:progressDrawable="@drawable/custom_ratingbar"
+            android:rating="3"
+            app:innerSpacing="@dimen/inner_spacing_rating_bar_on_detail_screen"
+            app:layout_constraintEnd_toStartOf="@id/count_review_tv"
+            app:layout_constraintStart_toStartOf="@id/start_margin_guideline"
+            app:layout_constraintTop_toBottomOf="@id/genre_tv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/count_review_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_1x"
+            android:gravity="center_vertical"
+            android:text="@string/count_review"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearanceMaterialCustom.Headline"
+            android:textColor="@color/storm_gray"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
+            app:layout_constraintStart_toEndOf="@id/movie_rating"
+            app:layout_constraintTop_toBottomOf="@id/genre_tv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/storyline_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_6x"
+            android:text="@string/storyline_title"
+            android:textAppearance="@style/TextAppearanceMaterialCustom.Headline.Shadow"
+            android:textColor="@color/whisper"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
+            app:layout_constraintStart_toStartOf="@+id/start_margin_guideline"
+            app:layout_constraintTop_toBottomOf="@id/count_review_tv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/storyline_descr_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_1x"
+            android:alpha="0.75"
+            android:lineSpacingExtra="@dimen/line_spacing_small"
+            android:text="@string/storyline_descr"
+            android:textAppearance="@style/TextAppearanceMaterialCustom.Body"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
+            app:layout_constraintStart_toStartOf="@+id/start_margin_guideline"
+            app:layout_constraintTop_toBottomOf="@id/storyline_title_tv" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cast_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_6x"
+            android:text="@string/cast_title"
+            android:textAppearance="@style/TextAppearanceMaterialCustom.Headline.Shadow"
+            android:textColor="@color/whisper"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_margin_guideline"
+            app:layout_constraintTop_toBottomOf="@id/storyline_descr_tv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cast_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_2x"
+            android:layout_marginEnd="@dimen/padding_2x"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/start_margin_guideline"
+            app:layout_constraintTop_toBottomOf="@id/cast_title_tv" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_margin_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/padding_4x" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_margin_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/padding_4x" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

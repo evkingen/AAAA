@@ -7,9 +7,9 @@ import com.alohagoha.aaaa.databinding.ActorItemBinding
 import com.alohagoha.aaaa.entities.Actor
 import com.bumptech.glide.Glide
 
-class ActorsListAdapter(val actorList: List<Actor>) :
+class ActorsListAdapter(private val actorList: List<Actor>) :
     RecyclerView.Adapter<ActorsListAdapter.ActorViewHolder>() {
-    class ActorViewHolder(val viewBinding: ActorItemBinding) :
+    class ActorViewHolder(private val viewBinding: ActorItemBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
         init {
             viewBinding.actorImageIv.clipToOutline = true
@@ -19,6 +19,7 @@ class ActorsListAdapter(val actorList: List<Actor>) :
             viewBinding.actorNameTv.text = actor.name
             Glide.with(viewBinding.root.context).load(actor.imageResId)
                 .into(viewBinding.actorImageIv)
+
         }
     }
 
