@@ -15,4 +15,7 @@
     <string name="name_movie_template">Avengers: End Game</string>
     <string name="like_descr">Like</string>
     <string name="movies_list_fragment_header">Movies list</string>
+    <!-- template data values -->
+    <string name="movie_review">%d reviews</string>
+    <string name="movie_duration">%d min</string>
 </resources>
