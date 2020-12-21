@@ -7,7 +7,7 @@ data class Movie(
         val name: String,
         val genre: String,
         val restriction_rating: String,
-        val rating: Int,
+        val rating: Float,
         val countReview: Int,
         val duration: Long,
         val isFavorite: Boolean = false,
