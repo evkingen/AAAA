@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.alohagoha.aaaa.R
 import com.alohagoha.aaaa.data.MoviesDataSource
 import com.alohagoha.aaaa.databinding.FragmentMoviesListBinding
-import com.alohagoha.aaaa.ui.adapters.MoviesListAdapter
+import com.alohagoha.aaaa.ui.rv.adapters.MoviesListAdapter
+import com.alohagoha.aaaa.ui.rv.decorators.GridSpaceItemDecoration
 
 class FragmentMoviesList : Fragment() {
 
@@ -37,13 +38,25 @@ class FragmentMoviesList : Fragment() {
 
     private fun initRv() {
         moviesListBinding.moviesRv.apply {
-            adapter = MoviesListAdapter(clickListener, MoviesDataSource.moviesList)
+            adapter = MoviesListAdapter(context, clickListener, MoviesDataSource.moviesList)
+
             layoutManager = GridLayoutManager(
                     context,
                     resources.getInteger(R.integer.movies_span_count),
                     GridLayoutManager.VERTICAL,
                     false
-            )
+            ).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int = when (position) {
+                        0 -> spanCount
+                        else -> 1
+                    }
+                }
+            }
+
+            val spacing = resources.getDimension(R.dimen.padding_3x)
+            val spanCount = resources.getInteger(R.integer.movies_span_count)
+            addItemDecoration(GridSpaceItemDecoration(spacing, spacing, spanCount))
             setHasFixedSize(true)
         }
     }

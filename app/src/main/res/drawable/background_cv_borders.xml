@@ -4,36 +4,6 @@
     <corners android:radius="8dp" />
     <gradient
         android:angle="135"
-        android:endColor="#80636375"
-        android:startColor="#803B3B4D" />
-</shape><!--
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    borders
-    <item
-        android:bottom="15dp"
-        android:left="15dp"
-        android:right="15dp"
-        android:top="15dp">
-        <shape
-            android:useLevel="true"
-            android:shape="rectangle">
-            <corners android:radius="8dp" />
-            <gradient
-                android:angle="0"
-                android:endColor="#80222232"
-                android:startColor="#80404056"
-                android:type="linear" />
-        </shape>
-    </item>
-    <item
-        android:bottom="10dp"
-        android:left="10dp"
-        android:right="10dp"
-        android:top="10dp">
-
-
-    </item>
-
-
-</layer-list>
--->
+        android:endColor="@color/comet"
+        android:startColor="@color/bright_gray" />
+</shape>
