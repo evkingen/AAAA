@@ -1,50 +1,44 @@
 package com.alohagoha.aaaa.ui
 
-import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alohagoha.aaaa.R
-import com.alohagoha.aaaa.data.MoviesDataSource
+import com.alohagoha.aaaa.data.loadMovies
 import com.alohagoha.aaaa.databinding.FragmentMoviesListBinding
 import com.alohagoha.aaaa.ui.rv.adapters.MoviesListAdapter
 import com.alohagoha.aaaa.ui.rv.decorators.GridSpaceItemDecoration
 
-class FragmentMoviesList : Fragment() {
+class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
 
-    private var clickListener: OnMovieCardClickListener? = null
+    var clickListener: OnMovieCardClickListener? = null
     private var _moviesListBinding: FragmentMoviesListBinding? = null
     private val moviesListBinding get() = _moviesListBinding!!
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (context as OnMovieCardClickListener).let {
-            clickListener = it
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _moviesListBinding = FragmentMoviesListBinding.bind(view)
+        initRv()
+        startLoadMovies()
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
-        _moviesListBinding = FragmentMoviesListBinding.inflate(inflater, container, false)
-        initRv()
-        return moviesListBinding.root
+    fun startLoadMovies() {
+        lifecycleScope.launchWhenCreated {
+            (moviesListBinding.moviesRv.adapter as MoviesListAdapter).updateList(loadMovies(context!!))
+        }
     }
 
     private fun initRv() {
         moviesListBinding.moviesRv.apply {
-            adapter = MoviesListAdapter(context, clickListener, MoviesDataSource.moviesList)
+            adapter = MoviesListAdapter(clickListener, listOf())
 
             layoutManager = GridLayoutManager(
-                    context,
-                    resources.getInteger(R.integer.movies_span_count),
-                    GridLayoutManager.VERTICAL,
-                    false
+                context,
+                resources.getInteger(R.integer.movies_span_count),
+                GridLayoutManager.VERTICAL,
+                false
             ).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int = when (position) {
@@ -58,6 +52,7 @@ class FragmentMoviesList : Fragment() {
             val spanCount = resources.getInteger(R.integer.movies_span_count)
             addItemDecoration(GridSpaceItemDecoration(spacing, spacing, spanCount))
             setHasFixedSize(true)
+
         }
     }
 
@@ -66,12 +61,11 @@ class FragmentMoviesList : Fragment() {
         _moviesListBinding = null
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        clickListener = null
+    fun interface OnMovieCardClickListener {
+        fun onClickMovie(movieId: Int)
     }
 
-    interface OnMovieCardClickListener {
-        fun onClickMovie()
+    companion object {
+        const val FRAGMENT_TAG = "TAG:FragmentMoviesList"
     }
 }

@@ -6,26 +6,31 @@ import com.alohagoha.aaaa.databinding.ActivityMainBinding
 import com.alohagoha.aaaa.ui.FragmentMoviesDetails
 import com.alohagoha.aaaa.ui.FragmentMoviesList
 
-class MainActivity : AppCompatActivity(), FragmentMoviesList.OnMovieCardClickListener {
+class MainActivity : AppCompatActivity() {
 
-    lateinit var mainBinding: ActivityMainBinding
+    private val onMovieCardClickListener = FragmentMoviesList.OnMovieCardClickListener { movieId ->
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, FragmentMoviesDetails.newInstance(movieId))
+            .addToBackStack(null)
+            .commit()
+    }
+    private lateinit var mainBinding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         actionBar?.setDisplayHomeAsUpEnabled(false)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, FragmentMoviesList())
-                    .commit()
+                .add(
+                    R.id.fragment_container,
+                    FragmentMoviesList().also { it.clickListener = onMovieCardClickListener },
+                    FragmentMoviesList.FRAGMENT_TAG
+                )
+                .commit()
         }
         setContentView(mainBinding.root)
+        (supportFragmentManager.findFragmentByTag(FragmentMoviesList.FRAGMENT_TAG) as FragmentMoviesList?)?.clickListener =
+            onMovieCardClickListener
     }
-
-    override fun onClickMovie() {
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, FragmentMoviesDetails())
-                .addToBackStack(null)
-                .commit()
-    }
-
 }
