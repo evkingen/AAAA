@@ -6,7 +6,6 @@
     android:background="@drawable/pg_rectangle"
     android:gravity="center"
     android:padding="@dimen/padding_tiny"
-    android:text="@string/pg"
     android:textAppearance="@style/TextAppearanceMaterialCustom.Headline"
     android:textColor="@color/white"
     android:textSize="@dimen/text_size_body_small" />

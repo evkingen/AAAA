@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/movie_cv"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/card_movie_height"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/movie_card_corners"
     app:cardElevation="@dimen/movie_card_elevation"
@@ -51,55 +51,54 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/genre_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/padding_tiny"
-            android:maxLines="1"
-            android:text="@string/genre"
+            android:gravity="start"
+            android:maxLines="2"
             android:textAppearance="@style/TextAppearanceMaterialCustom.Body"
             android:textColor="@color/radical_red"
             android:textSize="@dimen/text_size_body_tiny"
             app:layout_constraintBottom_toTopOf="@id/count_review_tv"
+            app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
             app:layout_constraintStart_toStartOf="@id/start_margin_guideline" />
 
         <com.alohagoha.aaaa.ui.utils.customview.ExtRatingBar
             android:id="@+id/movie_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_tiny"
-            android:layout_marginBottom="@dimen/padding_1x"
+            android:layout_marginBottom="@dimen/padding_tiny"
             android:numStars="5"
             android:progressDrawable="@drawable/custom_ratingbar_small"
-            android:rating="4"
             app:innerSpacing="@dimen/inner_spacing_rating_bar_on_list_screen"
+            app:layout_constraintBottom_toBottomOf="@id/count_review_tv"
             app:layout_constraintEnd_toStartOf="@id/count_review_tv"
-            app:layout_constraintStart_toStartOf="@id/start_margin_guideline"
-            app:layout_constraintTop_toTopOf="@id/count_review_tv" />
+            app:layout_constraintStart_toStartOf="@id/start_margin_guideline" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/count_review_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_small"
-            android:layout_marginTop="@dimen/padding_1x"
             android:layout_marginBottom="@dimen/padding_2x"
-            android:gravity="center_vertical"
-            android:text="@string/count_review"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearanceMaterialCustom.Headline"
             android:textColor="@color/storm_gray"
             android:textSize="@dimen/text_size_body_tiny"
             app:layout_constraintBottom_toBottomOf="@id/movie_image_iv"
+            app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
             app:layout_constraintStart_toEndOf="@id/movie_rating" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/movie_name_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/name_movie_template"
+            android:gravity="start"
+            android:maxLines="2"
             android:textAppearance="@style/TextAppearanceMaterialCustom.Headline"
             android:textColor="@color/whisper"
             android:textSize="@dimen/text_size_body"
+            app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
             app:layout_constraintStart_toStartOf="@id/start_margin_guideline"
             app:layout_constraintTop_toBottomOf="@id/movie_image_iv" />
 
@@ -108,15 +107,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/padding_2x"
-            android:text="@string/duration_movie_template"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearanceMaterialCustom.Headline"
             android:textColor="@color/smoky"
             android:textSize="@dimen/text_size_body_tiny"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
             app:layout_constraintStart_toStartOf="@id/start_margin_guideline"
-            app:layout_constraintTop_toBottomOf="@id/movie_name_tv" />
+            app:layout_constraintTop_toBottomOf="@id/movie_name_tv"
+            app:layout_constraintVertical_bias="1.0" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/start_margin_guideline"
@@ -124,6 +123,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="@dimen/padding_2x" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_margin_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/padding_2x" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/max_height_movie_image_guideline"
