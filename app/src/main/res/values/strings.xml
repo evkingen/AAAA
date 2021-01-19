@@ -12,4 +12,11 @@
     <string name="movie_review">%d reviews</string>
     <string name="movie_duration">%d min</string>
     <string name="movie_restriction">%d+</string>
+    <string name="sample_genre">Fantasy, Animation, Adventure, Comedy, Family</string>
+    <string name="sample_count_review">1395 REVIEWS</string>
+    <string name="sample_movie_name">The SpongeBob Movie: Sponge on the Run</string>
+    <string name="sample_duration">95 min</string>
+    <string name="sample_storyline_descr">When his best friend Gary is suddenly snatched away, SpongeBob takes Patrick on a madcap mission far beyond Bikini Bottom to save their pink-shelled pal.</string>
+    <string name="sample_restriction_rating">18+</string>
+    <string name="movies_details_error_message">Invalid load data! Please back previous screen and try again</string>
 </resources>
