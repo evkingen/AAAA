@@ -17,7 +17,10 @@ class MoviesListAdapter(
     private val clickListener: FragmentMoviesList.OnMovieCardClickListener?,
     private var moviesList: List<Movie>
 ) : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder>() {
-
+    companion object {
+        const val HEADER_TYPE = R.layout.view_holder_header
+        const val MOVIE_TYPE = R.layout.view_holder_movie
+    }
 
     fun updateList(newMoviesList: List<Movie>) {
         moviesList = newMoviesList
@@ -49,14 +52,14 @@ class MoviesListAdapter(
         }
     }
 
-    private fun getMovieItem(position: Int) = moviesList[position - 1]
-
     override fun getItemViewType(position: Int): Int = when (position) {
         0 -> HEADER_TYPE
         else -> MOVIE_TYPE
     }
 
     override fun getItemCount(): Int = moviesList.size + 1
+
+    private fun getMovieItem(position: Int) = moviesList[position - 1]
 
     abstract class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     class HeaderViewHolder(viewBinding: ViewHolderHeaderBinding) : MovieViewHolder(viewBinding.root)
@@ -90,7 +93,7 @@ class MoviesListAdapter(
             viewBinding.apply {
                 genreTv.text = movie.genres.joinToString { it.name }
                 movieNameTv.text = movie.title
-                movieRating.rating = (movie.ratings * 5 / 10)
+                movieRating.rating = movie.ratings
                 with(root.context.resources) {
                     durationTv.text = getString(R.string.movie_duration, movie.runtime)
                     countReviewTv.text = getString(R.string.movie_review, movie.numberOfRatings)
@@ -102,10 +105,5 @@ class MoviesListAdapter(
                     .into(viewBinding.movieImageIv)
             }
         }
-    }
-
-    companion object {
-        const val HEADER_TYPE = R.layout.view_holder_header
-        const val MOVIE_TYPE = R.layout.view_holder_movie
     }
 }

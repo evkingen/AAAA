@@ -5,17 +5,21 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.alohagoha.aaaa.MovieApp
 import com.alohagoha.aaaa.R
-import com.alohagoha.aaaa.data.loadMovies
 import com.alohagoha.aaaa.databinding.FragmentMoviesListBinding
 import com.alohagoha.aaaa.ui.rv.adapters.MoviesListAdapter
 import com.alohagoha.aaaa.ui.rv.decorators.GridSpaceItemDecoration
 
-class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
+class FragmentMoviesList(movieCardListener: OnMovieCardClickListener) :
+    Fragment(R.layout.fragment_movies_list) {
+    companion object {
+        const val FRAGMENT_TAG = "TAG:FragmentMoviesList"
+    }
 
-    var clickListener: OnMovieCardClickListener? = null
-    private var _moviesListBinding: FragmentMoviesListBinding? = null
-    private val moviesListBinding get() = _moviesListBinding!!
+    fun interface OnMovieCardClickListener {
+        fun onClickMovie(movieId: Int)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,15 +28,9 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
         startLoadMovies()
     }
 
-    fun startLoadMovies() {
-        lifecycleScope.launchWhenCreated {
-            (moviesListBinding.moviesRv.adapter as MoviesListAdapter).updateList(loadMovies(context!!))
-        }
-    }
-
     private fun initRv() {
         moviesListBinding.moviesRv.apply {
-            adapter = MoviesListAdapter(clickListener, listOf())
+            adapter = movieAdapter
 
             layoutManager = GridLayoutManager(
                 context,
@@ -56,16 +54,21 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
         }
     }
 
+    private fun startLoadMovies() {
+        lifecycleScope.launchWhenCreated {
+            movieAdapter.updateList(
+                (requireContext().applicationContext as MovieApp).jsonLoader.loadMovies()
+            )
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _moviesListBinding = null
     }
 
-    fun interface OnMovieCardClickListener {
-        fun onClickMovie(movieId: Int)
-    }
+    private val movieAdapter: MoviesListAdapter = MoviesListAdapter(movieCardListener, listOf())
+    private var _moviesListBinding: FragmentMoviesListBinding? = null
+    private val moviesListBinding get() = _moviesListBinding!!
 
-    companion object {
-        const val FRAGMENT_TAG = "TAG:FragmentMoviesList"
-    }
 }

@@ -2,9 +2,11 @@ package com.alohagoha.aaaa
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.add
 import com.alohagoha.aaaa.databinding.ActivityMainBinding
 import com.alohagoha.aaaa.ui.FragmentMoviesDetails
 import com.alohagoha.aaaa.ui.FragmentMoviesList
+import com.alohagoha.aaaa.ui.utils.MoviesFragmentFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,23 +16,18 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
+    private val fragmentFactory = MoviesFragmentFactory(onMovieCardClickListener)
     private lateinit var mainBinding: ActivityMainBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        actionBar?.setDisplayHomeAsUpEnabled(false)
-        mainBinding = ActivityMainBinding.inflate(layoutInflater)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        supportFragmentManager.fragmentFactory = fragmentFactory
+        super.onCreate(savedInstanceState)
+        mainBinding = ActivityMainBinding.inflate(layoutInflater)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(
-                    R.id.fragment_container,
-                    FragmentMoviesList().also { it.clickListener = onMovieCardClickListener },
-                    FragmentMoviesList.FRAGMENT_TAG
-                )
+                .add<FragmentMoviesList>(R.id.fragment_container)
                 .commit()
         }
         setContentView(mainBinding.root)
-        (supportFragmentManager.findFragmentByTag(FragmentMoviesList.FRAGMENT_TAG) as FragmentMoviesList?)?.clickListener =
-            onMovieCardClickListener
     }
 }
