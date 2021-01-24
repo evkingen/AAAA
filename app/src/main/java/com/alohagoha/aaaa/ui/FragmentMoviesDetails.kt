@@ -5,7 +5,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alohagoha.aaaa.MovieApp
 import com.alohagoha.aaaa.R
@@ -16,14 +18,22 @@ import com.alohagoha.aaaa.ui.rv.decorators.GridSpaceItemDecoration
 import com.bumptech.glide.Glide
 
 class FragmentMoviesDetails : Fragment(R.layout.fragment_movies_details) {
-    companion object {
-        const val MOVIE_ID = "FragmentMoviesDetails:movieId"
-        const val NO_ID = -1
 
-        fun newInstance(movieId: Int) = FragmentMoviesDetails().apply {
-            arguments = Bundle().also { it.putInt(MOVIE_ID, movieId) }
+    @Suppress("UNCHECKED_CAST")
+    private val movieDetailsModel: IMovieDetailsModel by viewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return MovieDetailsModel(
+                    movieId,
+                    (requireContext().applicationContext as MovieApp).moviesRepository
+                ) as T
+            }
         }
     }
+    private val actorsAdapter = ActorsListAdapter(listOf())
+    private val moviesDetailsBinding: FragmentMoviesDetailsBinding get() = _moviesDetailsBinding!!
+    private var _moviesDetailsBinding: FragmentMoviesDetailsBinding? = null
+    private var movieId: Int = NO_ID
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,7 +45,16 @@ class FragmentMoviesDetails : Fragment(R.layout.fragment_movies_details) {
         if (movieId == NO_ID) invalidMovieId()
         initRv()
         initBackButton()
-        startLoadMovies()
+        movieDetailsModel.movieDetails.observe(viewLifecycleOwner, ::updateDetails)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(MOVIE_ID, movieId)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _moviesDetailsBinding = null
     }
 
     private fun invalidMovieId() {
@@ -63,17 +82,8 @@ class FragmentMoviesDetails : Fragment(R.layout.fragment_movies_details) {
         }
     }
 
-    private fun startLoadMovies() {
-        lifecycleScope.launchWhenCreated {
-            moviesDetailsBinding.progressBar.visibility = View.VISIBLE
-            (requireContext().applicationContext as MovieApp).jsonLoader.loadMovies()
-                .find { it.id == movieId }?.let {
-                    initMovieDetails(it)
-                }
-        }
-    }
 
-    private fun initMovieDetails(movie: Movie) {
+    private fun updateDetails(movie: Movie) {
         moviesDetailsBinding.apply {
             countReviewTv.text =
                 resources.getString(R.string.movie_review, movie.numberOfRatings)
@@ -93,18 +103,13 @@ class FragmentMoviesDetails : Fragment(R.layout.fragment_movies_details) {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(MOVIE_ID, movieId)
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _moviesDetailsBinding = null
-    }
+    companion object {
+        const val MOVIE_ID = "FragmentMoviesDetails:movieId"
+        const val NO_ID = -1
 
-    private val actorsAdapter = ActorsListAdapter(listOf())
-    private var _moviesDetailsBinding: FragmentMoviesDetailsBinding? = null
-    private val moviesDetailsBinding: FragmentMoviesDetailsBinding
-        get() = _moviesDetailsBinding!!
-    private var movieId: Int = NO_ID
+        fun newInstance(movieId: Int) = FragmentMoviesDetails().apply {
+            arguments = Bundle().also { it.putInt(MOVIE_ID, movieId) }
+        }
+    }
 }
