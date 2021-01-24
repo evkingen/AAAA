@@ -19,7 +19,7 @@ class MovieDetailsModel(private val movieId: Int, private val moviesRepository: 
 
     override fun startLoadMovieDetails() {
         viewModelScope.launch {
-            moviesRepository.getAllMovies().find { it.id == movieId }?.let {
+            moviesRepository.getMovieById(movieId)?.let {
                 movieDetails.value = it
             }
         }
