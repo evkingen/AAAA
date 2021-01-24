@@ -2,20 +2,21 @@
     <string name="app_name">AAAA</string>
     <string name="back">Back</string>
     <string name="storyline_title">Storyline</string>
-    <string name="storyline_descr">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.</string>
     <string name="cast_title">Cast</string>
-    <string name="pg">13+</string>
-    <string name="movie_name">Avengers:\nEnd Game</string>
     <string name="detail_movie_descr">Movie\'s poster</string>
-    <string name="genre">Action, Adventure, Fantasy</string>
-    <string name="count_review">125 Reviews</string>
     <string name="actor_image_descr">Actor\'s image</string>
     <string name="movie_image_descr">Movie\'s image</string>
-    <string name="duration_movie_template">137 min</string>
-    <string name="name_movie_template">Avengers: End Game</string>
     <string name="like_descr">Like</string>
     <string name="movies_list_fragment_header">Movies list</string>
     <!-- template data values -->
     <string name="movie_review">%d reviews</string>
     <string name="movie_duration">%d min</string>
+    <string name="movie_restriction">%d+</string>
+    <string name="sample_genre">Fantasy, Animation, Adventure, Comedy, Family</string>
+    <string name="sample_count_review">1395 REVIEWS</string>
+    <string name="sample_movie_name">The SpongeBob Movie: Sponge on the Run</string>
+    <string name="sample_duration">95 min</string>
+    <string name="sample_storyline_descr">When his best friend Gary is suddenly snatched away, SpongeBob takes Patrick on a madcap mission far beyond Bikini Bottom to save their pink-shelled pal.</string>
+    <string name="sample_restriction_rating">18+</string>
+    <string name="movies_details_error_message">Invalid load data! Please back previous screen and try again</string>
 </resources>

@@ -30,5 +30,6 @@
     <dimen name="movie_card_corners">8dp</dimen>
     <dimen name="movie_card_elevation">24dp</dimen>
     <dimen name="movie_card_max_height_image">248dp</dimen>
+    <dimen name="card_movie_height">300dp</dimen>
 
 </resources>

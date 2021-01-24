@@ -4,6 +4,7 @@
     android:id="@+id/header_screen_tv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/padding_14x"
     android:drawablePadding="@dimen/padding_2x"
     android:text="@string/movies_list_fragment_header"
     android:textAppearance="@style/TextAppearanceMaterialCustom.Headline"

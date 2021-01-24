@@ -14,21 +14,14 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/detail_movie_iv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_detail_between_movie_name"
-            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/max_height_movie_screen"
             android:contentDescription="@string/detail_movie_descr"
             android:foreground="@drawable/gradient"
-            android:maxHeight="@dimen/max_height_movie_screen"
-            android:paddingStart="@dimen/left_padding_movie_screen"
-            android:paddingEnd="@dimen/right_padding_movie_screen"
-            android:scaleType="centerCrop"
-            android:src="@drawable/movie_poster"
-            app:layout_constraintBottom_toBottomOf="@id/movie_name_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/back"
@@ -48,10 +41,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
+            android:id="@+id/movie_restriction_rating"
             layout="@layout/widget_restriction_rating"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/movie_name_tv"
+            android:layout_marginBottom="@dimen/padding_14x"
+            app:layout_constraintBottom_toBottomOf="@id/detail_movie_iv"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="@id/start_margin_guideline"
             app:layout_constraintTop_toTopOf="parent"
@@ -62,11 +57,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_2x"
-            android:text="@string/movie_name"
             android:textAppearance="@style/TextAppearanceMaterialCustom.Headline.Shadow"
             android:textColor="@color/whisper"
             android:textSize="@dimen/text_size_header"
-            app:layout_constraintBottom_toBottomOf="@id/detail_movie_iv"
+            tools:text="@string/sample_movie_name"
+            app:layout_constraintTop_toBottomOf="@id/movie_restriction_rating"
             app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
             app:layout_constraintStart_toStartOf="@id/start_margin_guideline" />
 
@@ -75,10 +70,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_1x"
-            android:text="@string/genre"
             android:textAppearance="@style/TextAppearanceMaterialCustom.Body"
             android:textColor="@color/radical_red"
             android:textSize="@dimen/text_size_body"
+            tools:text="@string/sample_genre"
             app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
             app:layout_constraintStart_toStartOf="@id/start_margin_guideline"
             app:layout_constraintTop_toBottomOf="@id/movie_name_tv" />
@@ -91,8 +86,8 @@
             android:layout_marginEnd="@dimen/padding_2x"
             android:numStars="5"
             android:progressDrawable="@drawable/custom_ratingbar"
-            android:rating="3"
             app:innerSpacing="@dimen/inner_spacing_rating_bar_on_detail_screen"
+            tools:rating="4"
             app:layout_constraintEnd_toStartOf="@id/count_review_tv"
             app:layout_constraintStart_toStartOf="@id/start_margin_guideline"
             app:layout_constraintTop_toBottomOf="@id/genre_tv" />
@@ -103,11 +98,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_1x"
             android:gravity="center_vertical"
-            android:text="@string/count_review"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearanceMaterialCustom.Headline"
             android:textColor="@color/storm_gray"
             android:textSize="@dimen/text_size_body"
+            tools:text="@string/sample_count_review"
             app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
             app:layout_constraintStart_toEndOf="@id/movie_rating"
             app:layout_constraintTop_toBottomOf="@id/genre_tv" />
@@ -132,10 +127,10 @@
             android:layout_marginTop="@dimen/padding_1x"
             android:alpha="0.75"
             android:lineSpacingExtra="@dimen/line_spacing_small"
-            android:text="@string/storyline_descr"
             android:textAppearance="@style/TextAppearanceMaterialCustom.Body"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_body"
+            tools:text="@string/sample_storyline_descr"
             app:layout_constraintEnd_toEndOf="@id/end_margin_guideline"
             app:layout_constraintStart_toStartOf="@+id/start_margin_guideline"
             app:layout_constraintTop_toBottomOf="@id/storyline_title_tv" />
@@ -178,5 +173,15 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/padding_4x" />
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/steel_gray"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
